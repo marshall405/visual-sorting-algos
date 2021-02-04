@@ -1,0 +1,36 @@
+nav {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+}
+
+nav h1.logo {
+    width: 100%;
+    text-decoration: underline;
+    text-decoration-color: var(--primary-color);
+}
+nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+nav ul li {
+    user-select: none;
+    margin: 0px 10px;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: border ease-in-out .25s;
+
+}
+
+nav ul li.active {
+    border-color: var(--main-brand-color);
+}
+nav ul li:hover {
+    border-radius: 5px;
+    background: rgb(231, 231, 231);
+}

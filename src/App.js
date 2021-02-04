@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+
 import './App.css';
 
+
+import NavBar from './components/NavBar';
+import Quicksort from './components/Quicksort';
+
 function App() {
+  const [link, setLink] = useState(1)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar link={link} setLink={setLink}/>
+
+      <main>
+        { link === 1 ? <Quicksort /> : null}
+      </main>
     </div>
   );
 }
