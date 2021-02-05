@@ -114,80 +114,84 @@ export default function Quicksort() {
         </section>
         <section>
             <h3> How it works! </h3>
+            <div className="info"> 
+                <code>
+                    <ul>
+                    {`  function quicksort(arr, start, end) { `}
 
-            <code>
-                <ul>
-                {`  function quicksort(arr, start, end) { `}
-
-                <li>
-                    {`if(start >= end) return`}
-                </li>
-                <li>
-                    {`let index = partition(arr, start, end) `}
-                </li>
-                <li>
-                    {`quicksort(arr, start, index - 1) `}
-                </li>
-                <li>
-                    {`quicksort(arr, index + 1, end) `}
-                </li>
-                {`    }`}
-                </ul>
-                <ul>
- 
-                {`    function partition(arr, start, end) {`}
-
-                <li> 
-                {`        let pivot = arr[end] `}
-                </li>
-                <li> 
-                {`        let index = start `}
-                </li>
-             
                     <li>
-                {`        for(let i = start; i < end; i++) {`}
-                </li>
-                <ul className="forloop"> 
-                <li> 
-                    {`            if(arr[i] <= pivot){`}
+                        {`if(start >= end) return`}
                     </li>
-                    <div className="ifstate">
+                    <li>
+                        {`let index = partition(arr, start, end) `}
+                    </li>
+                    <li>
+                        {`quicksort(arr, start, index - 1) `}
+                    </li>
+                    <li>
+                        {`quicksort(arr, index + 1, end) `}
+                    </li>
+                    {`    }`}
+                    </ul>
+                    <ul>
+    
+                    {`    function partition(arr, start, end) {`}
+
                     <li> 
-                        {`           let tmp = arr[i]`}
+                    {`        let pivot = arr[end] `}
+                    </li>
+                    <li> 
+                    {`        let index = start `}
+                    </li>
+                
+                        <li>
+                    {`        for(let i = start; i < end; i++) {`}
+                    </li>
+                    <ul className="forloop"> 
+                    <li> 
+                        {`            if(arr[i] <= pivot){`}
                         </li>
+                        <div className="ifstate">
                         <li> 
-                        {`      arr[i] = arr[index]`}
-                        </li>
-                        <li> 
-                        {`      arr[index] = tmp`}
-                        </li>
-                        <li> 
-                        {`      index++`}
-                        </li>
-                        </div>
-                        <li> 
-                        {`  }`}
-                        </li>
-                        </ul>
-                        <li> 
-                        {`  }`}
-                        </li>
-                        <li> 
-                        {` let tmp = arr[index]`}
-                        </li>
-                        <li> 
-                        {`    arr[index] = pivot`}
-                        </li>
-                        <li> 
-                        {` arr[end] = tmp`}
-                        </li>
-                        <li> 
-                        {` return index`}
-                        </li>
-                        {`  }`}
-                        </ul>
-            </code>
-            <p> Quicksort uses recursion and relies on another call to a partition. The partition is where the real logic for this algorithm lives. The partition function </p>
+                            {`           let tmp = arr[i]`}
+                            </li>
+                            <li> 
+                            {`      arr[i] = arr[index]`}
+                            </li>
+                            <li> 
+                            {`      arr[index] = tmp`}
+                            </li>
+                            <li> 
+                            {`      index++`}
+                            </li>
+                            </div>
+                            <li> 
+                            {`  }`}
+                            </li>
+                            </ul>
+                            <li> 
+                            {`  }`}
+                            </li>
+                            <li> 
+                            {` let tmp = arr[index]`}
+                            </li>
+                            <li> 
+                            {`    arr[index] = pivot`}
+                            </li>
+                            <li> 
+                            {` arr[end] = tmp`}
+                            </li>
+                            <li> 
+                            {` return index`}
+                            </li>
+                            {`  }`}
+                            </ul>
+                </code>
+                <div>
+                    <p>Quicksort is a divide-and-conquer algorithm. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively. This can be done in-place, requiring small additional amounts of memory to perform the sorting.</p>
+                    <p><a href="https://en.wikipedia.org/wiki/Quicksort">Wikipedia</a></p>
+                </div>
+            </div>
         </section>
         </>
     )

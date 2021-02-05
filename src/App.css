@@ -22,12 +22,8 @@ section {
     background: var(--secondary-color);
 }
 
-section code {
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px var(--primary-color);
-}
 section code ul {
+    font-size: 12px; 
     list-style: none;
 }
 section code ul.forloop li {
@@ -37,11 +33,16 @@ section code ul.forloop li {
 section code ul.forloop .ifstate{
     margin-left: 25px;
 }
+
+section code ul li:hover {
+    background: rgba(0,0,0, .6);
+}
 section code ul li {
     border-radius: 5px;
     padding: 2px;
     margin: 3px 0 0 25px; 
-    background: rgba(0,0,0, .2)
+    background: rgba(0,0,0, .2);
+    transition: background ease-in-out .25s;
 }
 section h1 {
     width: 100%;
@@ -82,4 +83,26 @@ section .container div {
     opacity: 0;
     pointer-events: none;
     transition: opacity ease-in-out .25s;
+}
+
+
+.info {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.info > * {
+    margin: 15px;
+    width: 35%;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+.info a {
+    display: block;
+    padding: 20px;
+    text-align: right;
+    color: #FFF;
 }
