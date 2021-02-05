@@ -1,15 +1,17 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useEffect, useRef} from 'react'
 
 import p5 from 'p5'
 
 import {swap} from '../utils.js'
+
+
 
 export default function Quicksort() {
     const canvas = useRef(null)
     let sorting = false
     let values = []
     let states = []
-    let s;
+    let s = useRef(null)
 
     const Sketch = (p) => {
         let w = 5
@@ -38,8 +40,8 @@ export default function Quicksort() {
         
     }
     useEffect( () => {
-        s = new p5(Sketch, canvas.current)
-    },[])
+        s.current = new p5(Sketch, canvas.current)
+    })
 
     const startSort = () => {
         if(!sorting){
@@ -50,6 +52,7 @@ export default function Quicksort() {
     }
 
     async function quicksort(arr, start, end) {
+
         if(start >= end || !sorting) return
 
         let index = await partition(arr, start, end)
@@ -91,7 +94,7 @@ export default function Quicksort() {
         sorting = false
         document.getElementById('start').classList.remove('hide')
         for(let i = 0; i < values.length; i++){
-            values[i] = s.random(s.height)
+            values[i] = s.current.random(s.current.height)
             states[i] = -1
         }
     }
@@ -111,6 +114,79 @@ export default function Quicksort() {
         </section>
         <section>
             <h3> How it works! </h3>
+
+            <code>
+                <ul>
+                {`  function quicksort(arr, start, end) { `}
+
+                <li>
+                    {`if(start >= end) return`}
+                </li>
+                <li>
+                    {`let index = partition(arr, start, end) `}
+                </li>
+                <li>
+                    {`quicksort(arr, start, index - 1) `}
+                </li>
+                <li>
+                    {`quicksort(arr, index + 1, end) `}
+                </li>
+                {`    }`}
+                </ul>
+                <ul>
+ 
+                {`    function partition(arr, start, end) {`}
+
+                <li> 
+                {`        let pivot = arr[end] `}
+                </li>
+                <li> 
+                {`        let index = start `}
+                </li>
+             
+                    <li>
+                {`        for(let i = start; i < end; i++) {`}
+                </li>
+                <ul className="forloop"> 
+                <li> 
+                    {`            if(arr[i] <= pivot){`}
+                    </li>
+                    <div className="ifstate">
+                    <li> 
+                        {`           let tmp = arr[i]`}
+                        </li>
+                        <li> 
+                        {`      arr[i] = arr[index]`}
+                        </li>
+                        <li> 
+                        {`      arr[index] = tmp`}
+                        </li>
+                        <li> 
+                        {`      index++`}
+                        </li>
+                        </div>
+                        <li> 
+                        {`  }`}
+                        </li>
+                        </ul>
+                        <li> 
+                        {`  }`}
+                        </li>
+                        <li> 
+                        {` let tmp = arr[index]`}
+                        </li>
+                        <li> 
+                        {`    arr[index] = pivot`}
+                        </li>
+                        <li> 
+                        {` arr[end] = tmp`}
+                        </li>
+                        <li> 
+                        {` return index`}
+                        </li>
+                        {`  }`}
+                        </ul>
+            </code>
             <p> Quicksort uses recursion and relies on another call to a partition. The partition is where the real logic for this algorithm lives. The partition function </p>
         </section>
         </>
