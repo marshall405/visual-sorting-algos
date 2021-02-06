@@ -1,27 +1,28 @@
-import React, { useEffect, useRef} from 'react'
+import React, { useEffect} from 'react'
 
 import p5 from 'p5'
 
-import {swap} from '../utils.js'
+import {swap, sleep} from '../utils.js'
 
-
+import qsImg from '../images/quicksort.png'
 
 export default function Quicksort() {
-    const canvas = useRef(null)
     let sorting = false
     let values = []
     let states = []
-    let s = useRef(null)
-
+    let height;
     const Sketch = (p) => {
         let w = 5
         p.setup = () => {
             p.createCanvas(600,400)
+            height = p.height
             values = new Array(p.floor(p.width / w))
             for(let i = 0; i < values.length; i++){
                 values[i] = p.random(p.height)
                 states[i] = -1
             }
+            p.frameRate(120)
+
         }
         p.draw = () => {
             p.background(51);
@@ -40,7 +41,11 @@ export default function Quicksort() {
         
     }
     useEffect( () => {
-        s.current = new p5(Sketch, canvas.current)
+        new p5(Sketch, document.getElementById("canvas"))
+
+        return () => {
+            console.log('unmounted')
+        }
     })
 
     const startSort = () => {
@@ -87,14 +92,12 @@ export default function Quicksort() {
         return index
     }
     
-    function sleep() {
-        return new Promise(resolve => setTimeout(resolve, 30))
-    }
+
     const reset = () => {
         sorting = false
         document.getElementById('start').classList.remove('hide')
         for(let i = 0; i < values.length; i++){
-            values[i] = s.current.random(s.current.height)
+            values[i] = Math.random() * height
             states[i] = -1
         }
     }
@@ -108,85 +111,14 @@ export default function Quicksort() {
                     <button id="start" onClick={startSort}> Start </button>
                     <button onClick={reset}> Reset </button>
                 </div>
-                <div ref={canvas}></div>
+                <div id="canvas"></div>
                 <div className="col-1"></div>
             </div>
         </section>
         <section>
             <h3> How it works! </h3>
             <div className="info"> 
-                <code>
-                    <ul>
-                    {`  function quicksort(arr, start, end) { `}
-
-                    <li>
-                        {`if(start >= end) return`}
-                    </li>
-                    <li>
-                        {`let index = partition(arr, start, end) `}
-                    </li>
-                    <li>
-                        {`quicksort(arr, start, index - 1) `}
-                    </li>
-                    <li>
-                        {`quicksort(arr, index + 1, end) `}
-                    </li>
-                    {`    }`}
-                    </ul>
-                    <ul>
-    
-                    {`    function partition(arr, start, end) {`}
-
-                    <li> 
-                    {`        let pivot = arr[end] `}
-                    </li>
-                    <li> 
-                    {`        let index = start `}
-                    </li>
-                
-                        <li>
-                    {`        for(let i = start; i < end; i++) {`}
-                    </li>
-                    <ul className="forloop"> 
-                    <li> 
-                        {`            if(arr[i] <= pivot){`}
-                        </li>
-                        <div className="ifstate">
-                        <li> 
-                            {`           let tmp = arr[i]`}
-                            </li>
-                            <li> 
-                            {`      arr[i] = arr[index]`}
-                            </li>
-                            <li> 
-                            {`      arr[index] = tmp`}
-                            </li>
-                            <li> 
-                            {`      index++`}
-                            </li>
-                            </div>
-                            <li> 
-                            {`  }`}
-                            </li>
-                            </ul>
-                            <li> 
-                            {`  }`}
-                            </li>
-                            <li> 
-                            {` let tmp = arr[index]`}
-                            </li>
-                            <li> 
-                            {`    arr[index] = pivot`}
-                            </li>
-                            <li> 
-                            {` arr[end] = tmp`}
-                            </li>
-                            <li> 
-                            {` return index`}
-                            </li>
-                            {`  }`}
-                            </ul>
-                </code>
+                <img src={qsImg} />
                 <div>
                     <p>Quicksort is a divide-and-conquer algorithm. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively. This can be done in-place, requiring small additional amounts of memory to perform the sorting.</p>
                     <p><a href="https://en.wikipedia.org/wiki/Quicksort">Wikipedia</a></p>
