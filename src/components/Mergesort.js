@@ -10,6 +10,7 @@ export default function Mergesort() {
     let values = []
     let states = []
     let height;
+    let depth = 1
 
     const Sketch = (p) => {
         let w = 5
@@ -18,12 +19,12 @@ export default function Mergesort() {
             height = p.height
             values = new Array(p.floor(p.width / w))
             for(let i = 0; i < values.length; i++){
-                values[i] = p.random(p.height)
+                values[i] =  p.random(p.height)
                 states[i] = -1
             }
             p.frameRate(120)
         }
-        p.draw = () => {
+        p.draw = async () => {
             p.background(51);
             values.forEach( (val,i) => {
                 p.stroke(0)
@@ -36,38 +37,37 @@ export default function Mergesort() {
                 }
                 p.rect(i * w, p.height - val, w, val)
             })
+
         }
     }
     useEffect( () => {
         new p5(Sketch, document.getElementById('canvas'))
     })
 
-    async function mergesort(arr){
-        if(arr.length === 1) {
-            return arr
+    function mergesort(a) {
+        if (a.length <= 1) {
+          return a;
         }
+       
+        var mid = Math.round( a.length / 2);
 
-        const middle = Math.floor( arr.length / 2)
-        let left, right
-        Promise.all([
-            left = await mergesort(arr.slice(0, middle)) ,
-            right = await mergesort(arr.slice(middle))
-        ])
-        const sortedArr = []
+        var left = mergesort(a.slice(0, mid));
+        var right = mergesort(a.slice(mid));
 
-        let i = 0, j = 0
-
-        while(i < left.length && j < right.length){
-            if(left[i] < right[j]){
-                sortedArr.push(left[i++])
-            } else {
-                sortedArr.push(right[j++])
+        return merge(left,right);
+      }
+      
+      function merge(left, right) {
+        let sorted = [];
+        while (left && left.length > 0 && right && right.length > 0) {
+            if (left[0] <= right[0]) {
+              sorted.push(left.shift());
+            }
+            else {
+              sorted.push(right.shift());
             }
         }
-        while(i < left.length) sortedArr.push(left[i++])
-        while(j < right.length) sortedArr.push(right[j++])
-
-        return sortedArr
+        return sorted.concat(left, right);
     }
 
     
@@ -76,14 +76,14 @@ export default function Mergesort() {
         sorting = false
         document.getElementById('start').classList.remove('hide')
         for(let i = 0; i < values.length; i++){
-            values[i] = Math.random() * height
+            values[i] = (Math.random() * (height - 5)) + 5
             states[i] = -1
         }
     }
 
     const start = async () => {
-        if(sorting) return
-        mergesort(values).then(vals => values = vals)
+        if(!sorting) sorting = true
+        values = mergesort(values)
         
     }
     return (
