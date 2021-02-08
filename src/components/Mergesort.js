@@ -45,6 +45,7 @@ export default function Mergesort() {
     }
     useEffect( () => {
         new p5(Sketch, document.getElementById('canvas'))
+        document.getElementById("content").classList.add('main')
     })
 
     async function mergesort(a) {
@@ -124,7 +125,7 @@ export default function Mergesort() {
     }
 
     return (
-        <>
+        <div id="content">
         <section>
             <h1>  <code> mergesort() </code> </h1>
             <div className="container">
@@ -166,6 +167,6 @@ export default function Mergesort() {
                 </div>
             </div>
         </section>
-        </>
+        </div>
     )
 }

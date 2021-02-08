@@ -42,6 +42,7 @@ export default function Bubblesort() {
     }
     useEffect( () => {
         new p5(Sketch, document.getElementById("canvas"))
+        document.getElementById("content").classList.add('main')
     })
 
     const startSort = async () => {
@@ -94,7 +95,7 @@ export default function Bubblesort() {
     }
 
     return (
-        <>
+        <div id="content">
         <section>
             <h1>  <code> bubblesort() </code> </h1>
             <div className="container">
@@ -138,6 +139,6 @@ export default function Bubblesort() {
                 </div>
             </div>
         </section>
-        </>
+        </div>
     )
 }

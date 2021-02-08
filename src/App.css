@@ -5,6 +5,16 @@ main {
     min-height: calc(100vh - 100px);
     min-width: 820px;
 }
+
+#content {
+    opacity: 0;
+}
+.main {
+    opacity: 1 !important;
+    transition: opacity ease-in-out .15s;
+}
+
+
 canvas {
     border-radius: 5px;
     box-shadow: 0 0 20px rgb(0, 0, 0);

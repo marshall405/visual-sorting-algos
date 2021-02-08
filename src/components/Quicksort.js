@@ -42,6 +42,7 @@ export default function Quicksort() {
     }
     useEffect( () => {
         new p5(Sketch, document.getElementById("canvas"))
+        document.getElementById("content").classList.add('main')
     })
 
     const startSort = async () => {
@@ -101,7 +102,7 @@ export default function Quicksort() {
     }
 
     return (
-        <>
+        <div id="content">
         <section>
             <h1>  <code> quicksort() </code> </h1>
             <div className="container">
@@ -139,10 +140,12 @@ export default function Quicksort() {
             <div className="info"> 
                 <img src={qsImg} alt=""/>
                 <div>
-                   
+                   <p>
+                       Quicksort .........................................
+                   </p>
                 </div>
             </div>
         </section>
-        </>
+        </div>
     )
 }
