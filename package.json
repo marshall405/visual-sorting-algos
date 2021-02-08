@@ -9,6 +9,7 @@
     "p5": "^1.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-embed-gist": "^1.0.11",
     "react-scripts": "3.4.3"
   },
   "scripts": {

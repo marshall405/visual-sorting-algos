@@ -71,6 +71,8 @@ section .container {
 section .container div {
     margin: 10px;
 }
+
+
 .actions {
     display: flex;
     flex-direction: column;
@@ -84,11 +86,26 @@ section .container div {
     color: var(--secondary-color);
     cursor: pointer;
     width: 120px;
+    margin: 5px;
     padding: 5px;
-    transition: opacity ease-in-out .25s;
+    transition: opacity ease-in-out .25s, background ease-in-out .10s, color ease-in-out .15s;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+
 }
 
 
+.actions button:hover {
+    background: rgba(255, 255, 255, .2);
+    color: var(--secondary-font-color);
+}
+
+.actions button:active {
+    font-size: 8px;
+    width: 110px;
+    transition: font-size, width ease-in-out .05s;
+}
 
 .hide {
     opacity: 0;
@@ -107,12 +124,22 @@ section .container div {
 .info > * {
     margin: 15px;
     width: 35%;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px var(--primary-color);
 }
 
+.info p {
+    line-height: 28px;
+    text-indent: 15px;
+    word-spacing: 1px;
 
+}
+.info code {
+    font-weight: 900;
+    color: black;
+    background: #fff;
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 20px;
+}
 .notes {
     flex: 1;
     color: var(--secondary-font-color);

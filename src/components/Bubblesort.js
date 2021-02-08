@@ -1,10 +1,9 @@
 import React, { useEffect} from 'react'
-
+import ReactEmbedGist from 'react-embed-gist'
 import p5 from 'p5'
 
 import {swap, sleep} from '../utils.js'
 
-import bubbleImg from '../images/bubble.png'
 
 export default function Bubblesort() {
     let sorting = false
@@ -131,12 +130,12 @@ export default function Bubblesort() {
         <section>
             <h3> How it works! </h3>
             <div className="info"> 
-                <img src={bubbleImg} alt=""/>
-                <div>
-                    <p> Compare two elements and swap positions if the first element is greater than the second element. array[ j ] > array[ j + 1 ]</p>
-                    <p> Continue through the array until we reach the end. At this point the largest number in the array will be the last element.</p>
-                    <p> With the first pass through the array out of the way, we go back to the beginning, and repeat until the outer for loop has finished.</p>
-                </div>
+                <ReactEmbedGist gist="marshall405/c0fe7e5e86088e84bcb4649a27bc77f7"/>
+                <section>
+                    <p> Compare two elements and <code>swap</code> positions if the first element is greater than the second element. <code>array[j] > array[j + 1]</code></p>
+                    <p> Continue through the <code>array</code> until we reach the end. At this point the largest number in the <code>array</code> will be the last element.</p>
+                    <p> With the first pass through the <code>array</code> out of the way, we go back to the beginning, and repeat until the outer <code>for loop</code> has finished.</p>
+                </section>
             </div>
         </section>
         </div>

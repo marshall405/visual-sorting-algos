@@ -8603,6 +8603,13 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
+react-embed-gist@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/react-embed-gist/-/react-embed-gist-1.0.11.tgz#a1fb03996c71efe996b81cf5a6ed14ba30800384"
+  integrity sha512-rbfgVJrexnjNOtxgf6W5r/zBRJAWdeiL6/Ri/DIWFbWezBiYVqZk2i0WShCsDr4PTkc6kNPdSLjcuvjtpYjvWw==
+  dependencies:
+    react "^17.0.1"
+
 react-error-overlay@^6.0.7:
   version "6.0.7"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
@@ -8681,6 +8688,14 @@ react@^16.13.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
+
+react@^17.0.1:
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-17.0.1.tgz#6e0600416bd57574e3f86d92edba3d9008726127"
+  integrity sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 read-pkg-up@^2.0.0:
   version "2.0.0"

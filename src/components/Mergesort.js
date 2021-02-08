@@ -1,4 +1,5 @@
 import React, { useEffect} from 'react'
+import ReactEmbedGist from 'react-embed-gist'
 
 import p5 from 'p5'
 
@@ -161,10 +162,20 @@ export default function Mergesort() {
         <section>
             <h3> How it works! </h3>
             <div className="info"> 
-                <img src={Merge} alt=""/>
-                <div>
-                    
-                </div>
+                <ReactEmbedGist gist="marshall405/bbafb9d2622afc8cbd8b3014bb48620c"/>
+                <section>
+                    <p> Eh! <code>Mergesort</code>, am I right? Let's get started. We first create our base case so we can break out. 
+                        Notice here that, unlike <code>quicksort</code>, we are returning an <code>array</code>! 
+                        Next, we need to define the <code>middle</code> of the <code>array</code>. 
+                        We can now call <code>mergesort</code> for both the left and right sides of our <code>array</code>. 
+                        Everytime new call to <code>mergesort</code>, we are passing in a new <code>array</code>. 
+                        We <code>recursively</code> continue to call <code>mergesort</code> until we return an <code>array</code> of length 1. 
+                        We now have a <code>sorted array</code>. We will return back to Line 5 and Line 6 and continue on. 
+                        We can now created an empty <code>array</code>, this will be used to push elements from both the left and right <code>arrays</code>. 
+                        We can iterate over the left and right <code>arrays</code> and push the lesser element to the <code>sortedArray</code>. 
+                        Once our first <code>while loop</code> breaks, we push any remaining elements from the left <code>array</code> and than any remaining elements from the right <code>array</code>. 
+                        Finally, we return the <code>sortedArray</code> </p> 
+                </section>
             </div>
         </section>
         </div>

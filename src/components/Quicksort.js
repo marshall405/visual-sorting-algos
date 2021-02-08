@@ -1,4 +1,5 @@
 import React, { useEffect} from 'react'
+import ReactEmbedGist from 'react-embed-gist'
 
 import p5 from 'p5'
 
@@ -138,12 +139,25 @@ export default function Quicksort() {
         <section>
             <h3> How it works! </h3>
             <div className="info"> 
-                <img src={qsImg} alt=""/>
-                <div>
+                <ReactEmbedGist gist="marshall405/5ae084e8a53c1c2a271e0a1074e448a2"/>
+                <section>
                    <p>
-                       Quicksort .........................................
+                        We start by creating our base case to make sure we can break out. We then define our <code>index</code> and call <code>partition()</code>. Once <code>partition()</code> returns, we call Line: 6 - <code>quicksort(array, start, index -1 )</code> and Line 7 - <code>quicksort(array, index + 1, end)</code>. Now, you may be wondering why we are passing in <code>index - 1</code> and <code>index + 1</code>?. We do this because our <code>partition()</code> function will return the <code>index</code> of an element where everything to the left of it is less than and everything to the right is greater than.(We will disucss furthur, down below)
                    </p>
-                </div>
+                   <p>
+                       Our <code>partition()</code> function is where the logic of <code>quicksort</code> lives. 
+                       We first define our <code>pivot</code>, in the example to the left, we use the last element in the array. 
+                       Next, we define our <code>pivotIndex</code> to equal the <code>start</code>. 
+                       This is because we want to track where, in the array, we should <code>swap</code> elements. 
+                       We can now <code>loop</code> through our array. For each element, we check if its less than or equal to our <code>Pivot</code>(defined on Line 13). 
+                       If its true, we <code>swap</code> our current element in our <code>for loop</code> with the element at the <code>pivotIndex</code>.
+                        Keep in mind, we are not swaping our <code>Pivot</code>, we are using a variable defined as <code>pivotIndex</code>, which is originally equal to our <code>start</code> variable. 
+                        Everytime we make a <code>swap</code>, we need to <code>increment</code> our <code>pivotIndex</code> by one. 
+                        Once our <code>for loop</code> ends, we make our final <code>swap</code>, this time our <code>pivot</code> and <code>pivotIndex</code>. 
+                        Now our array has all elements less than our <code>pivot</code> to the left and all elements greater than the <code>pivot</code> to the right. 
+                        We can now return the <code>pivotIndex</code>.
+                    </p>
+                </section>
             </div>
         </section>
         </div>
