@@ -5,9 +5,8 @@ import p5 from 'p5'
 
 import {swap, sleep} from '../utils.js'
 
-import qsImg from '../images/quicksort.png'
-
 export default function Quicksort() {
+    let width = window.screen.width - 40
     let sorting = false
     let values = []
     let states = []
@@ -15,7 +14,7 @@ export default function Quicksort() {
     const Sketch = (p) => {
         let w = 5
         p.setup = () => {
-            p.createCanvas(600,400)
+            p.createCanvas(width > 600 ? 600 : width ,400)
             height = p.height
             values = new Array(p.floor(p.width / w))
             for(let i = 0; i < values.length; i++){

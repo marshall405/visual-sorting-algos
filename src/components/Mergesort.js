@@ -4,9 +4,9 @@ import ReactEmbedGist from 'react-embed-gist'
 import p5 from 'p5'
 
 import {sleep} from '../utils.js'
-import Merge from '../images/merge.png'
 
 export default function Mergesort() {
+    let width = window.screen.width - 40
     let sorting = false
     let values = []
     let states = []
@@ -15,7 +15,7 @@ export default function Mergesort() {
     const Sketch = (p) => {
         let w = 5
         p.setup = () => {
-            p.createCanvas(600,400)
+            p.createCanvas(width > 600 ? 600 : width ,400)
             height = p.height
             values = new Array(p.floor(p.width / w))
             for(let i = 0; i < values.length; i++){
