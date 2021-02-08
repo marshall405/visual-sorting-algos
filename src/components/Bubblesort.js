@@ -4,9 +4,9 @@ import p5 from 'p5'
 
 import {swap, sleep} from '../utils.js'
 
-import qsImg from '../images/quicksort.png'
+import bubbleImg from '../images/bubble.png'
 
-export default function Quicksort() {
+export default function Bubblesort() {
     let sorting = false
     let values = []
     let states = []
@@ -48,48 +48,41 @@ export default function Quicksort() {
         if(!sorting){
             sorting = true
             document.getElementById('start').classList.add('hide')
-            await quicksort(values, 0, values.length - 1)
-            states.forEach( (state,i) => states[i] = 0 )
-        }
-    }
-
-    async function quicksort(arr, start, end) {
-
-        if(start >= end || !sorting) return
-
-        let index = await partition(arr, start, end)
-        states[index] = -1
-        await Promise.all([
-            quicksort(arr, start, index - 1),
-            quicksort(arr, index + 1, end)
-        ])
-
-    }
-
-    async function partition(arr, start, end) {
-        for(let i = start; i < end; i++){
-            states[i] = 1
-        }
-        let pivot = arr[end]
-        let index = start
-        states[index] = 0
-        for(let i = start; i < end; i++){
-            if(arr[i] <= pivot) {
-                await sleep()
-                swap(arr, i, index)
-                states[index] = -1
-                index++
-                states[index] = 0
+            await bubblesort(values)
+            if(sorting){
+                states.forEach( (state,i) => states[i] = 0 )
             }
         }
-        await sleep()
-        swap(arr, index, end)
-        for(let i = start; i < end; i++){
-            states[i] = -1
-        }
-        return index
     }
-    
+
+    async function bubblesort(arr) {
+        let count
+        let n = 1
+        while(true){
+            if(!sorting) break
+            count = 0
+            for(let i = 0; i < arr.length - n; i++){
+                if(!sorting) break
+                states[i + 1] = 1
+
+                if(arr[i] > arr[i + 1]){
+                    await swap(arr, i, i + 1)
+                    count++
+                }
+                await sleep(4)
+                states[i+1] = -1
+            }
+            n++
+            await sleep(20)
+            if(count === 0) break
+        }
+
+        if(!sorting) {
+            for(let i = 0; i < values.length; i++){
+                states[i] = -1
+            }
+        }
+    }
 
     const reset = () => {
         sorting = false
@@ -103,7 +96,7 @@ export default function Quicksort() {
     return (
         <>
         <section>
-            <h1>  <code> quicksort() </code> </h1>
+            <h1>  <code> bubblesort() </code> </h1>
             <div className="container">
                 <div className="actions col-1">
                     <button id="start" onClick={startSort}> Start </button>
@@ -111,8 +104,8 @@ export default function Quicksort() {
                 </div>
                 <div id="canvas"></div>
                 <div className="notes">
-                    <p>Quicksort is a divide-and-conquer algorithm. It works by selecting a 'pivot' element from the array and partitioning the other elements into two sub-arrays, according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively. This can be done in-place, requiring small additional amounts of memory to perform the sorting.</p>
-                    <p><a href="https://en.wikipedia.org/wiki/Quicksort">Wikipedia</a></p>
+                    <p>Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted. The algorithm, which is a comparison sort, is named for the way smaller or larger elements "bubble" to the top of the list.</p>
+                    <p><a href="https://en.wikipedia.org/wiki/Bubble_sort">Wikipedia</a></p>
                 </div>
             </div>
             <div className="runtime">
@@ -120,15 +113,15 @@ export default function Quicksort() {
                     <div>
                         <h6> Time Complexity</h6>
                         <ul>
-                            <li> Best Case: O(n log n)</li>
-                            <li> Average: O(n log n)</li>
+                            <li> Best Case: O(n)</li>
+                            <li> Average: O(n^2)</li>
                             <li> Worst Case: O(n^2)</li>
                         </ul>
                     </div>
                     <div>
                         <h6> Space Complexity</h6>
                         <ul>
-                            <li> O(log n) </li>
+                            <li> O(1) </li>
                         </ul>
                     </div>
                 </div>
@@ -137,9 +130,11 @@ export default function Quicksort() {
         <section>
             <h3> How it works! </h3>
             <div className="info"> 
-                <img src={qsImg} alt=""/>
+                <img src={bubbleImg} alt=""/>
                 <div>
-                   
+                    <p> Compare two elements and swap positions if the first element is greater than the second element. array[ j ] > array[ j + 1 ]</p>
+                    <p> Continue through the array until we reach the end. At this point the largest number in the array will be the last element.</p>
+                    <p> With the first pass through the array out of the way, we go back to the beginning, and repeat until the outer for loop has finished.</p>
                 </div>
             </div>
         </section>

@@ -4,8 +4,8 @@ async function swap(arr, i, j){
     arr[j] = tmp
 }
 
-function sleep() {
-    return new Promise(resolve => setTimeout(resolve, 30))
+function sleep(ms = 30) {
+    return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 export {

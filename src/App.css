@@ -55,6 +55,7 @@ section .container {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 section .container div {
@@ -88,7 +89,8 @@ section .container div {
 
 .info {
     display: flex;
-    width: 100%;
+    align-items: flex-start;
+    width: 100%;    
     flex-direction: row;
     justify-content: space-evenly;
 }
@@ -100,9 +102,55 @@ section .container div {
     box-shadow: 0 0 5px var(--primary-color);
 }
 
-.info a {
+
+.notes {
+    flex: 1;
+    color: var(--secondary-font-color);
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0px 0px 10px 0px;
+    line-height: 22px;
+}
+
+.notes a {
     display: block;
     padding: 20px;
     text-align: right;
-    color: #FFF;
+    color: var(--secondary-font-color);
+}
+
+.notes p:first-child::before, .notes p:first-child::after {
+    content: "\"";
+    padding: 5px;
+}
+
+
+.runtime {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.runtime div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.runtime div div {
+    display: flex;
+    flex-direction: column;
+    background: var(--primary-color);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 1px var(--secondary-font-color);
+}
+
+.runtime ul {
+    list-style: none;
+}
+
+.runtime ul li {
+    font-size: 10px;
 }
