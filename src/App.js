@@ -9,7 +9,7 @@ import Mergesort from './components/Mergesort';
 import Bubblesort from './components/Bubblesort';
 
 function App() {
-  const [link, setLink] = useState(3)
+  const [link, setLink] = useState(1)
 
   return (
     <div className="App">

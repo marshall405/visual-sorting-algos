@@ -3,7 +3,7 @@ import ReactEmbedGist from 'react-embed-gist'
 
 import p5 from 'p5'
 
-import {swap, sleep} from '../utils.js'
+import {swap, sleep, random} from '../utils.js'
 
 export default function Quicksort() {
     let width = window.screen.width - 40
@@ -12,13 +12,17 @@ export default function Quicksort() {
     let states = []
     let height;
     const Sketch = (p) => {
-        let w = 5
+        let w = 3
         p.setup = () => {
             p.createCanvas(width > 600 ? 600 : width ,400)
             height = p.height
             values = new Array(p.floor(p.width / w))
             for(let i = 0; i < values.length; i++){
-                values[i] = p.random(p.height)
+                let num = random(0, height)
+                values[i] = {
+                    h: num,
+                    r: num
+                }
                 states[i] = -1
             }
             p.frameRate(120)
@@ -26,16 +30,16 @@ export default function Quicksort() {
         }
         p.draw = () => {
             p.background(51);
-            values.forEach( (val,i) => {
+            values.forEach( ({h,r},i) => {
                 p.stroke(0)
                 if(states[i] === 0){
-                    p.fill(138, 43, 226)
-                }else if(states[i] === 1){
-                    p.fill(134, 238, 177)
-                }else {
                     p.fill(255)
+                }else if(states[i] === 1){
+                    p.fill(`rgba(0,${r},${r}, .5)`)
+                }else {
+                    p.fill(0,r,r)
                 }
-                p.rect(i * w, p.height - val, w, val)
+                p.rect(i * w, p.height - h, w, h)
             })
         }
         
@@ -49,8 +53,7 @@ export default function Quicksort() {
         if(!sorting){
             sorting = true
             document.getElementById('start').classList.add('hide')
-            await quicksort(values, 0, values.length - 1)
-            states.forEach( (state,i) => states[i] = 0 )
+            quicksort(values, 0, values.length - 1)
         }
     }
 
@@ -71,21 +74,23 @@ export default function Quicksort() {
         for(let i = start; i < end; i++){
             states[i] = 1
         }
-        let pivot = arr[end]
+        let pivot = arr[end].h
         let index = start
         states[index] = 0
+        states[end] = 0
         for(let i = start; i < end; i++){
-            if(arr[i] <= pivot) {
-                await sleep()
+            if(arr[i].h <= pivot) {
+                await sleep(20)
                 swap(arr, i, index)
                 states[index] = -1
+                states[end] = -1
                 index++
                 states[index] = 0
+                states[end] = 0
             }
         }
-        await sleep()
         swap(arr, index, end)
-        for(let i = start; i < end; i++){
+        for(let i = start; i <= end; i++){
             states[i] = -1
         }
         return index
@@ -96,7 +101,11 @@ export default function Quicksort() {
         sorting = false
         document.getElementById('start').classList.remove('hide')
         for(let i = 0; i < values.length; i++){
-            values[i] = Math.random() * height
+            let num = random(0, height)
+            values[i] = {
+                h: num,
+                r: num
+            }
             states[i] = -1
         }
     }

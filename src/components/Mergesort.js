@@ -3,7 +3,7 @@ import ReactEmbedGist from 'react-embed-gist'
 
 import p5 from 'p5'
 
-import {sleep} from '../utils.js'
+import {sleep, random} from '../utils.js'
 
 export default function Mergesort() {
     let width = window.screen.width - 40
@@ -13,14 +13,16 @@ export default function Mergesort() {
     let height;
 
     const Sketch = (p) => {
-        let w = 5
+        let w = 6
         p.setup = () => {
             p.createCanvas(width > 600 ? 600 : width ,400)
             height = p.height
             values = new Array(p.floor(p.width / w))
             for(let i = 0; i < values.length; i++){
+                let num = random(0, height)
                 values[i] = {
-                    val: p.random(p.height),
+                    val: num,
+                    r: num,
                     id: i,
                     state: -1
                 } 
@@ -30,14 +32,14 @@ export default function Mergesort() {
         }
         p.draw = () => {
             p.background(51);
-            values.forEach( ({val,state},i) => {
+            values.forEach( ({val,state,r},i) => {
                 p.stroke(0)
                 if(state === 0){
                     p.fill(138, 43, 226)
                 }else if(state === 1){
                     p.fill(134, 238, 177)
                 }else {
-                    p.fill(255)
+                    p.fill(r)
                 }
                 p.rect(i * w, p.height - val, w, val)
             })
@@ -105,8 +107,10 @@ export default function Mergesort() {
         sorting = false
         document.getElementById('start').classList.remove('hide')
         for(let i = 0; i < values.length; i++){
+            let num = random(0,height)
             values[i] = {
-                val: Math.random() * height,
+                val: num,
+                r: num,
                 id: i,
                 state: -1
             } 
@@ -117,11 +121,7 @@ export default function Mergesort() {
         if(!sorting) {
             sorting = true
             document.getElementById('start').classList.add('hide')
-            await mergesort(values)
-            if(sorting){
-                values.forEach( val => val.state = 0)
-            }
-
+            mergesort(values)
         }
     }
 
