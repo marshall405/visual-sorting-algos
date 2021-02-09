@@ -2,7 +2,8 @@ import React, { useEffect} from 'react'
 import ReactEmbedGist from 'react-embed-gist'
 import p5 from 'p5'
 
-import {swap, sleep} from '../utils.js'
+import {swap, sleep, random} from '../utils.js'
+
 
 
 export default function Bubblesort() {
@@ -12,13 +13,17 @@ export default function Bubblesort() {
     let states = []
     let height;
     const Sketch = (p) => {
-        let w = 5
+        let w = 10
         p.setup = () => {
             p.createCanvas(width > 600 ? 600 : width ,400)
             height = p.height
             values = new Array(p.floor(p.width / w))
             for(let i = 0; i < values.length; i++){
-                values[i] = p.random(p.height)
+                let num = random(0, height)
+                values[i] = {
+                    height: num,
+                    r: num,
+                }
                 states[i] = -1
             }
             p.frameRate(120)
@@ -28,14 +33,13 @@ export default function Bubblesort() {
             p.background(51);
             values.forEach( (val,i) => {
                 p.stroke(0)
+                
                 if(states[i] === 0){
-                    p.fill(138, 43, 226)
-                }else if(states[i] === 1){
-                    p.fill(134, 238, 177)
-                }else {
                     p.fill(255)
+                }else {
+                    p.fill(0,val.r,val.r)
                 }
-                p.rect(i * w, p.height - val, w, val)
+                p.rect(i * w, p.height - val.height, w, val.height)
             })
         }
         
@@ -50,9 +54,6 @@ export default function Bubblesort() {
             sorting = true
             document.getElementById('start').classList.add('hide')
             await bubblesort(values)
-            if(sorting){
-                states.forEach( (state,i) => states[i] = 0 )
-            }
         }
     }
 
@@ -64,32 +65,29 @@ export default function Bubblesort() {
             count = 0
             for(let i = 0; i < arr.length - n; i++){
                 if(!sorting) break
-                states[i + 1] = 1
-
-                if(arr[i] > arr[i + 1]){
+                states[i+1] = 0
+                if(
+                    arr[i].r > arr[i + 1].r
+                ){
                     await swap(arr, i, i + 1)
                     count++
                 }
-                await sleep(4)
+                await sleep(20)
                 states[i+1] = -1
             }
             n++
-            await sleep(20)
             if(count === 0) break
         }
 
-        if(!sorting) {
-            for(let i = 0; i < values.length; i++){
-                states[i] = -1
-            }
-        }
     }
 
     const reset = () => {
         sorting = false
         document.getElementById('start').classList.remove('hide')
         for(let i = 0; i < values.length; i++){
-            values[i] = Math.random() * height
+            let num = random(0, height)
+            values[i].height = num
+            values[i].r = num
             states[i] = -1
         }
     }
